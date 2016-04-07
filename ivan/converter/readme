@@ -1,0 +1,17 @@
+Start a coordinator and dameon...
+
+to do this go to the proper directory (coordinator, dameon_1 or dameon_2) and run these lines in this order...
+
+hyperdex coordinator -f -l 127.0.0.1 -p 1984 <= to start the coordinator
+
+hyperdex daemon -f --listen=127.0.0.1 --listen-port=2012 --coordinator=127.0.0.1 --coordinator-port=1984 <= to start the daemon
+
+Nextly run the converter.py if you get an error comment out the a.rm_space line and try again. Comment it back in once ran.
+
+Then try and run getter.py to retrieve a record.
+
+Voila!
+
+
+fix.
+

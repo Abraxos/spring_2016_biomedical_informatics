@@ -1,0 +1,39 @@
+import psycopg2
+import hyperdex.admin
+
+# Initialize hyperdex admin
+a = hyperdex.admin.Admin('127.0.0.1', 1984)
+
+# Connect
+try:
+	conn=psycopg2.connect("dbname='fhir' user='fhir' password='fhir'")
+except:
+	print "I am unable to connect to the database."
+
+def convert(table):
+	# Execute Query
+	cur = conn.cursor()
+	try:
+		query = "SELECT * from " + table
+		cur.execute(query)
+	except:	
+		print "I can't SELECT from " + table
+
+	
+	# Output to rows
+	rows = cur.fetchall()
+	
+	# Establish hyperdex space
+#	a.addspace('space '+table+' '
+#	'key '++
+
+	# Test
+	print "\nRows: \n"
+	for row in rows:
+		print "   ", row
+
+#convert("resource_compartment")
+convert("resource_index_term")
+#convert("resource_version")
+#convert("launch_context")
+#convert("launch_context_params")
