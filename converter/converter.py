@@ -144,8 +144,8 @@ def convert(table,first_run):
 	else:
 		print("no conversion of this table")
 
-#convert("resource_compartment",False)
-#convert("resource_index_term",False)
-#convert("resource_version",False)
-#convert("launch_context",False)
+convert("resource_compartment",True)
+convert("resource_index_term",True)
+convert("resource_version",True)
+convert("launch_context",Fal)
 convert("launch_context_params",False)
