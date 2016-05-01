@@ -40,12 +40,12 @@ def convert(table,first_run):
 	if(table == "resource_compartment"):
 		s = 'space '+table+' '+\
 		'key '+colnames[1] +' '+\
-		'attributes string '+colnames[0]+', list(string) '+colnames[2]+' '+\
+		'attributes string '+colnames[0]+', string '+colnames[2]+' '+\
 		'subspace '+colnames[0]+' '+\
 		'create 8 partitions tolerate 2 failures'
 		a.add_space(s)
 		for row in rows:
-			c.put(table,row[1], {colnames[0]:row[0], colnames[2]:row[2]})
+			c.put(table,row[1], {colnames[0]:row[0], colnames[2]:str(row[2])})
 	elif(table == "resource_index_term"):
                 s = 'space '+table+' '+\
                 'key '+colnames[0] +' '+\
@@ -144,8 +144,8 @@ def convert(table,first_run):
 	else:
 		print("no conversion of this table")
 
-convert("resource_compartment",True)
-convert("resource_index_term",True)
-convert("resource_version",True)
-convert("launch_context",Fal)
-convert("launch_context_params",False)
+convert("resource_compartment",False)
+#convert("resource_index_term",True)
+#convert("resource_version",True)
+#convert("launch_context",Fal)
+#convert("launch_context_params",False)
