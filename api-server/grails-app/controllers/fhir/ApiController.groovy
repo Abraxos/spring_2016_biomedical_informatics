@@ -1,5 +1,8 @@
 package fhir
 
+@Grab('org.codehaus.groovy:groovy-xmlrpc:0.8')
+import groovy.net.xmlrpc.*
+
 import org.codehaus.groovy.grails.web.util.WebUtils
 
 import java.util.regex.Pattern
@@ -214,8 +217,20 @@ class ApiController {
     if (params.resource == "Patient" && params.id =~ /everything/) {
       everything()
     } else {
+      def derp = 'http://localhost:7080'
+      def herp = new XMLRPCServerProxy(derp, true)
+      def aPatient = herp."read"(params.resource,params.id)
+      ResourceVersion poop = new ResourceVersion()
+      poop.version_id = aPatient.version_id
+      poop.fhir_id = aPatient.fhir_id
+      poop.fhir_type = aPatient.fhir_type
+      poop.rest_operation = aPatient.rest_operation
+      poop.content = aPatient.content
       ResourceVersion h = sqlService.getLatestByFhirId(params.resource, params.id)
-      readService(h)
+
+//    Make your choice!
+//    readService(h)
+      readService(poop)
     }
   }
 
