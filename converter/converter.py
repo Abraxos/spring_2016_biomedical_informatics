@@ -4,8 +4,8 @@ import hyperdex.admin
 import hyperdex.client
 
 # Initialize hyperdex admin
-a = hyperdex.admin.Admin('127.0.0.1', 1984)
-c = hyperdex.client.Client('127.0.0.1', 1984)
+a = hyperdex.admin.Admin('127.0.0.1', 1337)
+c = hyperdex.client.Client('127.0.0.1', 1337)
 # Connect
 try:
 	conn=psycopg2.connect("dbname='fhir' user='fhir' password='fhir'")
@@ -35,8 +35,8 @@ def convert(table,first_run):
 #	print(types)
 	
 	# Establish a new hyperdex space
-	if(not first_run):
-		a.rm_space(table)
+	#if(not first_run):
+#		a.rm_space(table)
 	if(table == "resource_compartment"):
 		s = 'space '+table+' '+\
 		'key '+colnames[1] +' '+\
@@ -145,7 +145,7 @@ def convert(table,first_run):
 		print("no conversion of this table")
 
 convert("resource_compartment",False)
-#convert("resource_index_term",True)
-#convert("resource_version",True)
-#convert("launch_context",Fal)
-#convert("launch_context_params",False)
+convert("resource_index_term",True)
+convert("resource_version",True)
+convert("launch_context",True)
+convert("launch_context_params",True)
